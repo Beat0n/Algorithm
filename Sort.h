@@ -6,18 +6,35 @@
 #define ALGORITHM_SORT_H
 #include <vector>
 
+// O(n*n)
 std::vector<int> insertionSort(std::vector<int>& nums) {
     for (int i=1;i<nums.size();i++) {
         if (nums[i] >= nums[i-1]) continue;
-        int j;
-        for (j=i-1;j>=0;j--) {
-            if (nums[i] < nums[j]) break;
+        for (int j=i;j>=0;j--) {
+            if (nums[j] < nums[j-1]) {
+                int tmp = nums[j];
+                nums[j] = nums[j-1];
+                nums[j-1] = tmp;
+            } else {
+                break;
+            }
+        }
+    }
+    return nums;
+}
+
+// O(n*n)
+std::vector<int> selectionSort(std::vector<int>& nums) {
+    for (int i=0; i<nums.size(); i++) {
+        int min_index = i;
+        for (int j=i+1; j<nums.size(); j++) {
+            if (nums[j] < nums[min_index]) {
+                min_index = j;
+            }
         }
         int tmp = nums[i];
-        for (int k=i;k>j;k--) {
-            nums[k] = nums[k-1];
-        }
-        nums[j] = tmp;
+        nums[i] = nums[min_index];
+        nums[min_index] = tmp;
     }
     return nums;
 }
