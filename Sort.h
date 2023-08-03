@@ -73,4 +73,17 @@ void mergeSort(std::vector<int>& nums, int start, int end) {
     mergeSort(nums, ((start + end) / 2) + 1, end);
     merge(nums, start, end);
 }
+
+//! bubbleSort: O(n*n)
+void bubbleSort(std::vector<int>& nums) {
+    for (int i=0; i<nums.size()-1; i++) {
+        for (int j=nums.size() - 1; j>i; j--) {
+            if (nums[j] < nums[j-1]) {
+                int tmp = nums[j];
+                nums[j] = nums[j-1];
+                nums[j-1] = tmp;
+            }
+        }
+    }
+}
 #endif //ALGORITHM_SORT_H
